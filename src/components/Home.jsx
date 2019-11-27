@@ -6,9 +6,9 @@ const Home = () => {
     return (
     <Container className="mt-5">
         <Row>
-            <Col xs={1} md={3} lg={4}>
+            <Col xs={12} sm={6} md={3} lg={3}>
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px180" />
+                    <Card.Img variant="top" src="https://images.pexels.com/photos/2313686/pexels-photo-2313686.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940/100px180" />
                     <Card.Body>
                         <Card.Title>Card Title</Card.Title>
                         <Card.Text>
@@ -18,9 +18,9 @@ const Home = () => {
                     </Card.Body>
                 </Card>
             </Col>
-            <Col xs={1} md={3} lg={4}>
+            <Col xs={12} sm={6} md={3} lg={3}>
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px180" />
+                    <Card.Img variant="top" src="https://images.pexels.com/photos/2313686/pexels-photo-2313686.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940/100px180" />
                     <Card.Body>
                         <Card.Title>Card Title</Card.Title>
                         <Card.Text>
@@ -30,9 +30,9 @@ const Home = () => {
                     </Card.Body>
                 </Card>
             </Col>
-            <Col xs={1} md={3} lg={4}>
+            <Col xs={12} sm={6} md={3} lg={3}>
                 <Card>
-                    <Card.Img variant="top" src="holder.js/100px180" />
+                    <Card.Img variant="top" src="https://images.pexels.com/photos/2313686/pexels-photo-2313686.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940/100px180" />
                     <Card.Body>
                         <Card.Title>Card Title</Card.Title>
                         <Card.Text>

@@ -6,8 +6,9 @@ import MainContainer from './components/MainContainer';
 import Navigation from './components/common/Navigation';
 import Footer from './components/common/Footer';
 import Home from './components/Home';
-import Login from './components/auth/Login';
-import Register from './components/auth/Register';
+import Login from './components/auth/login/Index';
+import Register from './components/auth/register/Index';
+import CreateRecipe from './components/recipes/Create';
 import AuthProvider from './contexts/Auth';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
             <Route path="/" exact component={Home}/>
             <Route path="/login" component={Login}/>
             <Route path="/register" component={Register}/>
+            <Route path="/recipe/create" component={CreateRecipe}/>
           </MainContainer>
         <Footer/>
       </AuthProvider>

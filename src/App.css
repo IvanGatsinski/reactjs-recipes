@@ -1,3 +1,60 @@
+a {
+  font-size: 1.1em;
+  color: rgb(27, 85, 77);
+  position: relative;
+}
+.btn.focus, .btn:focus {
+  box-shadow: none;
+}
+.menu-link__dash--animated:hover::before {
+  position: absolute;
+  content: '';
+  bottom: -5px;
+  right: 50%;
+  height: 2px;
+  width: 50%;
+  background: rgb(27, 85, 77);
+  animation-name: left_dash;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+.menu-link__dash--animated:hover::after {
+  position: absolute;
+  content: '';
+  bottom: -5px;
+  left: 50%;
+  height: 2px;
+  width: 50%;
+  background: rgb(27, 85, 77);
+  animation-name: right_dash;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+@keyframes left_dash {
+    from {
+      width: 0%;
+    }
+    to {
+      width: 50%;
+    }
+}
+@keyframes right_dash {
+  from {
+    width: 0%;
+  }
+  to {
+    width: 50%;
+  }
+}
+.bg-light {
+  background-color: rgb(165, 238, 228) !important;
+  box-shadow: 0px 3px 3px 0px rgb(60, 192, 174);
+}
+a:hover {
+  text-decoration: none;
+  transition: all 0.5s;
+  color: rgb(0, 0, 0);
+}
 .super-colors {
   background: #348bd3;
 }
