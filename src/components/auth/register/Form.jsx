@@ -1,11 +1,28 @@
 import React from 'react';
 import useForm from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 import { Form, Button } from 'react-bootstrap';
+import { authenticateUser } from '../../../api/auth';
 
 const RegisterForm = () => {
 
-    const { register, handleSubmit } = useForm()
-    const onSubmit = values => console.log(values)
+    const history = useHistory();
+    const { register, handleSubmit } = useForm();
+    const onSubmit = async (data, e) => {
+        
+        data.recipe_ids = [];
+        data.authType = 'register';
+
+        try {
+            const registeredUser = await authenticateUser(data);
+            history.push('/login')
+
+        } catch (error) {
+            throw error;
+        }
+
+        e.target.reset();
+    }
 
     return (
         <Form onSubmit={handleSubmit(onSubmit)}>

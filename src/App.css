@@ -1,10 +1,17 @@
-a {
+body {
+  background-color: rgb(220, 255, 251);
+}
+a,.dropdown-menu__btn {
   font-size: 1.1em;
-  color: rgb(27, 85, 77);
+  color: rgb(0, 0, 80);
   position: relative;
 }
 .btn.focus, .btn:focus {
   box-shadow: none;
+}
+.nav-title__icon {
+  font-size: 2em;
+  color: rgb(0, 0, 80);
 }
 .menu-link__dash--animated:hover::before {
   position: absolute;
@@ -13,7 +20,7 @@ a {
   right: 50%;
   height: 2px;
   width: 50%;
-  background: rgb(27, 85, 77);
+  background: rgb(0, 0, 80);
   animation-name: left_dash;
   animation-duration: 0.5s;
   animation-fill-mode: forwards;
@@ -25,7 +32,7 @@ a {
   left: 50%;
   height: 2px;
   width: 50%;
-  background: rgb(27, 85, 77);
+  background: rgb(0, 0, 80);
   animation-name: right_dash;
   animation-duration: 0.5s;
   animation-fill-mode: forwards;
@@ -53,7 +60,7 @@ a {
 a:hover {
   text-decoration: none;
   transition: all 0.5s;
-  color: rgb(0, 0, 0);
+  color: rgb(0, 0, 80);
 }
 .super-colors {
   background: #348bd3;

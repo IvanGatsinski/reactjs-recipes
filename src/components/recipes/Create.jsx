@@ -1,17 +1,44 @@
 import React, { useState } from 'react';
 import useForm from 'react-hook-form';
+import { useHistory } from 'react-router-dom';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
-import uuid from 'uuid'
+import uuid from 'uuid';
+import { addRecipe } from '../../api/recipes';
 
 const CreateRecipe = () => {
-
+    const history = useHistory()
     const [inputCount, setInputCount] = useState([{
         id: uuid(),
     }]);
     const { register, handleSubmit } = useForm()
 
-    const onSubmit = (value) => {
-        console.log(value)
+    const onSubmit = async (formData, e) => {
+        let recipeData = {
+            name: formData.name,
+            type: formData.type,
+            description: formData.description,
+            imgUrl: formData.imgUrl + '/100px180',
+            cook_time: formData.time,
+            ingredients: [],
+        };
+
+        for (const key in formData) {
+            if (key !== 'name' && 
+                key !== 'type' && 
+                key !== 'description' && 
+                key !== 'imgUrl' && 
+                key !== 'time') {
+                recipeData.ingredients.push(formData[key]);
+            }
+        };
+
+        try {
+            await addRecipe(recipeData);
+            history.push('/');
+        } catch (error) {
+            throw error;
+        }
+        e.target.reset()
     }
     
     const ingredientsInputFields = () => {
@@ -35,7 +62,7 @@ const CreateRecipe = () => {
                         variant="warning"
                         size="sm"
                         >
-                            Remove ingredient
+                        Remove ingredient
                         </Button>
                 </Form.Group>
             )
@@ -66,8 +93,43 @@ const CreateRecipe = () => {
                         {ingredientsInputFields()}
 
                         <Form.Group>
+                            <Form.Label>Recipe Name</Form.Label>
+                            <Form.Control 
+                                type="text" 
+                                placeholder="Recipe name" 
+                                name="name"
+                                ref={register}
+                            />
+                            <Form.Text className="text-muted">
+                            Copy-paste the image-url.
+                            </Form.Text>
+                        </Form.Group>
+
+                        <Form.Group>
+                            <Form.Label>Recipe Type</Form.Label>
+                            <Form.Control as="select" name="type" ref={register}>
+                                <option>Salads</option>
+                                <option>Soups</option>
+                                <option>Main Meals</option>
+                                <option>Desserts</option>
+                            </Form.Control>
+                        </Form.Group>
+
+                        <Form.Group>
+                            <Form.Label>Image URL</Form.Label>
+                            <Form.Control 
+                                type="text" 
+                                placeholder="Image URL" 
+                                name="imgUrl"
+                                ref={register}
+                            />
+                            <Form.Text className="text-muted">
+                            Copy-paste the image-url.
+                            </Form.Text>
+                        </Form.Group>
+
+                        <Form.Group>
                             <Form.Label>Describe recipe</Form.Label>
-                            
                             <Form.Control 
                                 as="textarea" 
                                 rows="3"
