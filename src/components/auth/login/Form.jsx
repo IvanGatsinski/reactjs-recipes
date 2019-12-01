@@ -35,7 +35,7 @@ const LoginForm = () => {
     return (
         <Form onSubmit={handleSubmit(onSubmit)}>
             <Form.Group>
-                <Form.Label>Username address</Form.Label>
+                <Form.Label>Username</Form.Label>
                 <Form.Control
                     name="username"
                     type="text" 

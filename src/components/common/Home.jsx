@@ -1,19 +1,16 @@
 import React, { useContext, useEffect } from 'react';
 import { fetchAllRecipes } from '../../api/recipes';
 import { RecipeContext } from '../../contexts/Recipe';
-//import { UserContext } from '../../contexts/User';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
 
 const Home = () => {
 
-    const { recipes, getAllRecipes, clearAllRecipes } = useContext(RecipeContext);
-    //const { user } = useContext(UserContext);
+    const { recipes, setRecipes, clearAllRecipes } = useContext(RecipeContext);
 
- //console.log(user)
     useEffect(() => {
         fetchAllRecipes()
-            .then(allRecipes => {
-                getAllRecipes(allRecipes)
+            .then(({ data }) => {
+                setRecipes(data)
             })
             .catch(err => {throw err})
     }, [])
@@ -24,7 +21,7 @@ const Home = () => {
         }
     }, [])
 
-    const recipeGallery = recipes!==null ?
+    const recipeGallery = recipes !== null ?
     recipes.map(recipe => (
         <Col xs={12} sm={6} md={4} lg={4} key={recipe._id}>
             <Card>

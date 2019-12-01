@@ -16,6 +16,7 @@ const Navigation = () => {
     }, [])
     console.log(user)
     const username = user ? user.username : false;
+    const routeToMyRecipes = user ? `/user/${user._id}/recipes` : '#'
     const logout = () => {
       destroyToken()
       destroyUserSession()
@@ -29,7 +30,7 @@ const Navigation = () => {
           <LinkContainer to="/profile/:id" activeClassName="">
             <Dropdown.Item eventKey="1">My Profile</Dropdown.Item>
           </LinkContainer>
-          <LinkContainer to="/" activeClassName="">
+          <LinkContainer to={routeToMyRecipes} activeClassName="">
             <Dropdown.Item eventKey="2">My Recipes</Dropdown.Item>
           </LinkContainer>
           <LinkContainer to="/recipe/create" activeClassName="">

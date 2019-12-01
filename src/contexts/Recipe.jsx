@@ -6,16 +6,13 @@ const RecipeProvider = (props) => {
 
     const [recipes, setRecipes] = useState(null);
 
-    const getAllRecipes = (allRecipes) => {
-        setRecipes(allRecipes.data)
-    }
     const clearAllRecipes = () => {
         setRecipes(null)
     }
 
     return (
         <RecipeContext.Provider 
-        value={{recipes, getAllRecipes, clearAllRecipes}}>
+        value={{recipes, setRecipes, clearAllRecipes}}>
             {props.children}
         </RecipeContext.Provider>
     )
