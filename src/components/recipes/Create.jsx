@@ -59,6 +59,7 @@ const CreateRecipe = () => {
                     </Form.Text>
                         <Button 
                         onClick={() => { removeIngredient(input.id)} } 
+                        disabled={inputCount.length <= 1 ? true : false}
                         variant="warning"
                         size="sm"
                         >
@@ -84,7 +85,7 @@ const CreateRecipe = () => {
                 <Col xs="6">
                     <Form onSubmit={handleSubmit(onSubmit)}>
                         <Button
-                         onClick={addIngredient} 
+                         onClick={addIngredient}
                          variant="success"
                          className="my-3"
                          size="sm"

@@ -14,12 +14,10 @@ const Home = () => {
             })
             .catch(err => {throw err})
     }, [])
-
+    console.log(recipes)
     useEffect(() => {
-        return () => {
-            clearAllRecipes()
-        }
-    }, [])
+        return () => clearAllRecipes();
+    }, []);
 
     const recipeGallery = recipes !== null ?
     recipes.map(recipe => (

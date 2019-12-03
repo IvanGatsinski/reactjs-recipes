@@ -9,6 +9,7 @@ import Home from './components/common/Home';
 import Login from './components/auth/login/Index';
 import Register from './components/auth/register/Index';
 import CreateRecipe from './components/recipes/Create';
+import EditRecipe from './components/recipes/Edit';
 import UserRecipes from './components/recipes/UserRecipes';
 import AuthProvider from './contexts/Auth';
 import UserProvider from './contexts/User';
@@ -31,6 +32,7 @@ function App() {
                 }/>
                 <Route path="/register" component={Register}/>
                 <PrivateRoute path="/recipe/create" component={CreateRecipe}/>
+                <PrivateRoute path="/recipe/:id/edit" component={EditRecipe}/>
                 <PrivateRoute path="/user/:id/recipes" component={UserRecipes}/>
               </MainContainer>
             </RecipeProvider>

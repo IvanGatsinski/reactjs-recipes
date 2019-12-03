@@ -7,7 +7,10 @@ import { RecipeContext } from '../../contexts/Recipe';
 const UserRecipes = () => {
 
     const { id } = useParams();
-    const { recipes, setRecipes } = useContext(RecipeContext);
+    const { recipes, setRecipes, clearAllRecipes } = useContext(RecipeContext);
+
+    const viewRoute = recipeId => `/recipe/${recipeId}/view`;
+    const updateRoute = recipeId => `/recipe/${recipeId}/edit`;
 
     useEffect(() => {
         fetchUserRecipes(id)
@@ -16,6 +19,10 @@ const UserRecipes = () => {
             })
             .catch(err => {throw err})
     }, [])
+
+    useEffect(() => {
+        return () => clearAllRecipes();
+    }, []);
 
     const deleteRecipe = async (recipeId) => {
         try {
@@ -46,7 +53,7 @@ const UserRecipes = () => {
                                     View
                             </Button>
                         </NavLink>
-                        <NavLink to="/">
+                        <NavLink to={updateRoute(recipe._id)}>
                             <Button className="mx-2" variant="outline-success">Update</Button>
                         </NavLink>
                         <Button onClick={() => deleteRecipe(recipe._id)} className="mx-2" variant="outline-danger">Delete</Button>
