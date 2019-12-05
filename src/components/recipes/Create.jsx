@@ -1,23 +1,27 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import useForm from 'react-hook-form';
+import { UserContext } from '../../contexts/User';
 import { useHistory } from 'react-router-dom';
 import { Form, Button, Container, Row, Col } from 'react-bootstrap';
 import uuid from 'uuid';
 import { addRecipe } from '../../api/recipes';
 
 const CreateRecipe = () => {
-    const history = useHistory()
+
+    const history = useHistory();
+    const { user } = useContext(UserContext);
     const [inputCount, setInputCount] = useState([{
         id: uuid(),
     }]);
-    const { register, handleSubmit } = useForm()
+    const { register, handleSubmit } = useForm();
 
     const onSubmit = async (formData, e) => {
         let recipeData = {
+            author: user.username,
             name: formData.name,
             type: formData.type,
             description: formData.description,
-            imgUrl: formData.imgUrl + '/100px180',
+            imgUrl: formData.imgUrl,
             cook_time: formData.time,
             ingredients: [],
         };

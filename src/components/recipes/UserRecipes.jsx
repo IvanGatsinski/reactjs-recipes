@@ -1,5 +1,5 @@
 import React,{ useEffect, useContext } from 'react'
-import { Container, Row, Col, Card, Button, ButtonToolbar } from 'react-bootstrap';
+import { Container, Row, Col, CardGroup, Card, Button, ButtonToolbar } from 'react-bootstrap';
 import { useParams, NavLink } from 'react-router-dom';
 import { fetchUserRecipes, removeRecipe } from '../../api/recipes';
 import { RecipeContext } from '../../contexts/Recipe';
@@ -7,7 +7,7 @@ import { RecipeContext } from '../../contexts/Recipe';
 const UserRecipes = () => {
 
     const { id } = useParams();
-    const { recipes, setRecipes, clearAllRecipes } = useContext(RecipeContext);
+    const { recipes, setRecipes } = useContext(RecipeContext);
 
     const viewRoute = recipeId => `/recipe/${recipeId}/view`;
     const updateRoute = recipeId => `/recipe/${recipeId}/edit`;
@@ -21,7 +21,7 @@ const UserRecipes = () => {
     }, [])
 
     useEffect(() => {
-        return () => clearAllRecipes();
+        return () => setRecipes(null);
     }, []);
 
     const deleteRecipe = async (recipeId) => {
@@ -41,16 +41,23 @@ const UserRecipes = () => {
             <Card>
                 <Card.Header as="h5">{recipe.name}</Card.Header>
                     <Card.Body>
-                        <Card.Title>Recipe type: {recipe.type}</Card.Title>
-                        <Card.Text>
-                            Cooking Time {recipe.cook_time}
-                            <br/>
-                            Created at: {new Date(recipe._kmd.ect).toLocaleDateString()}
-                        </Card.Text>
+                        <CardGroup className="mb-2">
+                            <Card className="p-2">
+                                <Card.Img variant="top" src={recipe.imgUrl} />
+                            </Card>
+                            <Card className="p-2">
+                                <Card.Title>Recipe type: {recipe.type}</Card.Title>
+                                <Card.Text>
+                                    Cooking Time {recipe.cook_time}
+                                    <br/>
+                                    Created at: {new Date(recipe._kmd.ect).toLocaleDateString()}
+                                </Card.Text>
+                            </Card>
+                        </CardGroup>
                         <ButtonToolbar>
-                        <NavLink to="/">
+                        <NavLink to={viewRoute(recipe._id)}>
                             <Button className="mx-2" variant="outline-info">
-                                    View
+                                View
                             </Button>
                         </NavLink>
                         <NavLink to={updateRoute(recipe._id)}>

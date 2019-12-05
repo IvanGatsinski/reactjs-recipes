@@ -1,10 +1,30 @@
 body {
   background-color: rgb(220, 255, 251);
 }
-a,.dropdown-menu__btn {
+a, .dropdown-menu__btn {
   font-size: 1.1em;
   color: rgb(0, 0, 80);
   position: relative;
+}
+.card__footer {
+  border-top: none;
+}
+.card-author {
+  font-size: 1.1em;
+  font-weight: 600;
+  font-style: italic;
+  color: rgba(0, 95, 8, 0.85);
+  text-transform: capitalize;
+}
+.cooking-time {
+  display: inline-block;
+  border-radius: 4px;
+  margin-bottom: 14px;
+  padding: 0.25rem .5rem;
+}
+.cooking-time__icon {
+  font-size: 1.3em;
+  color: rgb(16, 126, 1);
 }
 .btn.focus, .btn:focus {
   box-shadow: none;

@@ -9,6 +9,7 @@ import Home from './components/common/Home';
 import Login from './components/auth/login/Index';
 import Register from './components/auth/register/Index';
 import CreateRecipe from './components/recipes/Create';
+import ViewRecipe from './components/recipes/View';
 import EditRecipe from './components/recipes/Edit';
 import UserRecipes from './components/recipes/UserRecipes';
 import AuthProvider from './contexts/Auth';
@@ -25,13 +26,14 @@ function App() {
           <Navigation/>
             <RecipeProvider>
               <MainContainer>
-                <PrivateRoute path="/" exact component={Home}/>
                 <Route path="/login" component={Login}/>
                 <Route path="/logout" render={props =>
                   <Redirect to="/login"/>
                 }/>
                 <Route path="/register" component={Register}/>
+                <PrivateRoute path="/" exact component={Home}/>
                 <PrivateRoute path="/recipe/create" component={CreateRecipe}/>
+                <PrivateRoute path="/recipe/:id/view" component={ViewRecipe}/>
                 <PrivateRoute path="/recipe/:id/edit" component={EditRecipe}/>
                 <PrivateRoute path="/user/:id/recipes" component={UserRecipes}/>
               </MainContainer>

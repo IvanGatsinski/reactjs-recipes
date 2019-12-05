@@ -1,6 +1,7 @@
 import React, { useContext, useState, useEffect } from 'react';
+import { RecipeContext } from '../../contexts/Recipe';
 import { UserContext } from '../../contexts/User';
-import { Form, Button, Container, Row, Col } from 'react-bootstrap';
+import { Form, ButtonToolbar, Button, Container, Row, Col } from 'react-bootstrap';
 import useForm from 'react-hook-form';
 import { useParams, useHistory } from 'react-router-dom';
 import { fetchRecipe, updateRecipe } from '../../api/recipes';
@@ -12,7 +13,7 @@ const EditRecipe = () => {
     const { id } = useParams();
     const { register, handleSubmit } = useForm();
     const { user } = useContext(UserContext);
-    const [recipe, setRecipe] = useState(null);
+    const { recipe, setRecipe } = useContext(RecipeContext);
 
     useEffect(() => { 
         (async () => {
@@ -28,10 +29,11 @@ const EditRecipe = () => {
 
     const onSubmit = async (formData, e) => {
         let recipeData = {
+            author: user.username,
             name: formData.name,
             type: formData.type,
             description: formData.description,
-            imgUrl: formData.imgUrl + '/100px180',
+            imgUrl: formData.imgUrl,
             cook_time: formData.time,
             ingredients: [],
         };
@@ -47,6 +49,7 @@ const EditRecipe = () => {
         };
 
         try {
+            console.log('form data ->', formData)
             await updateRecipe(id,recipeData);
             history.push(`/user/${user._id}/recipes`);
         } catch (error) {
@@ -57,11 +60,11 @@ const EditRecipe = () => {
 
     const formRecipe = recipe !== null ? 
     (
-    <Form onSubmit={handleSubmit(onSubmit)}>
-        {recipe.ingredients.map(ingr => {
-            const ingredient = `ingredient-${uuid()}`
+    <Form onSubmit={handleSubmit(onSubmit)} className="my-5">
+        {recipe.ingredients.map((ingr, index) => {
+            const ingredient = `ingredient-${index}`
             return (
-                <Form.Group key={uuid()}>
+                <Form.Group key={index}>
                     <Form.Label>Ingredient</Form.Label>
                     <Form.Control 
                         type="text" 
@@ -142,10 +145,14 @@ const EditRecipe = () => {
             What is the avarage time to cook this meal by this recipe.
             </Form.Text>
         </Form.Group>
-
-        <Button variant="primary" type="submit">
-            Submit
-        </Button>
+        <ButtonToolbar>
+            <Button className="mr-3" variant="success" type="submit">
+                Save
+            </Button>
+            <Button onClick={() => history.goBack()} variant="primary" type="submit">
+                Cancel
+            </Button>
+        </ButtonToolbar>
     </Form>
     )
     : (<h2>Loading......</h2>)

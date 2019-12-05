@@ -2,10 +2,13 @@ import React, { useContext, useEffect } from 'react';
 import { fetchAllRecipes } from '../../api/recipes';
 import { RecipeContext } from '../../contexts/Recipe';
 import { Container, Row, Col, Card, Button } from 'react-bootstrap';
+import { NavLink } from 'react-router-dom';
 
 const Home = () => {
 
-    const { recipes, setRecipes, clearAllRecipes } = useContext(RecipeContext);
+    const { recipes, setRecipes } = useContext(RecipeContext);
+
+    const viewRoute = recipeId => `/recipe/${recipeId}/view`;
 
     useEffect(() => {
         fetchAllRecipes()
@@ -13,10 +16,10 @@ const Home = () => {
                 setRecipes(data)
             })
             .catch(err => {throw err})
-    }, [])
-    console.log(recipes)
+    }, []);
+
     useEffect(() => {
-        return () => clearAllRecipes();
+        return () => setRecipes(null);
     }, []);
 
     const recipeGallery = recipes !== null ?
@@ -29,8 +32,15 @@ const Home = () => {
                     <Card.Text>
                         {recipe.type}
                     </Card.Text>
-                    <Button variant="outline-info">View Recipe</Button>
+                    <NavLink to={viewRoute(recipe._id)}>
+                            <Button className="mx-2" variant="outline-info">
+                                View Recipe
+                            </Button>
+                    </NavLink>
                 </Card.Body>
+                <Card.Footer>
+                    Written by <span className="card-author">{recipe.author}</span>
+                </Card.Footer>
             </Card>
         </Col>
     )) : (<h2>Loading...</h2>)
